@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday, Chomu! 🎉</title>
+  <style>
+    p{
+        color: black;
+    }
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #87ceeb, #ffe4e1);
+      color: white;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .clouds {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="30" r="15" fill="rgba(255,255,255,0.5)"/><circle cx="50" cy="25" r="20" fill="rgba(255,255,255,0.5)"/><circle cx="80" cy="35" r="18" fill="rgba(255,255,255,0.5)"/></svg>');
+      background-repeat: repeat-x;
+      background-size: 200px 100px;
+      animation: moveClouds 20s linear infinite;
+    }
+    @keyframes moveClouds {
+      from { background-position: 0 0; }
+      to { background-position: 200px 0; }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #ff69b4;
+      text-shadow: 0 0 10px #ff69b4;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 10px #ff69b4; }
+      100% { text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff69b4; }
+    }
+
+    #countdown {
+      font-size: 2em;
+      margin: 20px 0;
+      color: #ffd700;
+    }
+
+    .photo-frame {
+      margin: 20px auto;
+      text-align: center;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+      animation: glowPulse 3s infinite alternate;
+      display: none;
+    }
+
+    .animated-photo {
+      width: auto;
+      height: auto;
+      max-width: 90%;
+      max-height: 90vh;
+      border-radius: 20px;
+      animation: zoomInOut 8s ease-in-out infinite;
+    }
+
+    @keyframes zoomInOut {
+      0% { transform: scale(1); opacity: 0; }
+      50% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes glowPulse {
+      0% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.6); }
+      100% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.8); }
+    }
+
+    .sparkles::before, .sparkles::after {
+      content: '✨';
+      position: absolute;
+      font-size: 2em;
+      color: gold;
+      animation: sparkleMove 4s linear infinite;
+    }
+    .sparkles::before { top: 10%; left: 15%; }
+    .sparkles::after { bottom: 10%; right: 15%; }
+    @keyframes sparkleMove {
+      0%, 100% { opacity: 0.8; transform: translateY(0); }
+      50% { opacity: 1; transform: translateY(-20px) rotate(20deg); }
+    }
+
+    .cake {font-size:5em;margin:20px 0;cursor:pointer;transition:transform 0.3s;}
+    .cake:hover{transform:scale(1.1);}
+    .cake.cut{animation:shake 0.5s;}
+    @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-5px);}75%{transform:translateX(5px);}}
+    .cake-piece{position:absolute;font-size:2em;animation:fly 2s ease-out forwards;z-index:2;}
+    @keyframes fly{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(-200px) rotate(360deg);opacity:0;}}
+    .candles{display:flex;justify-content:center;margin:20px 0;}
+    .candle{width:20px;height:60px;background:#f4a460;margin:0 5px;position:relative;cursor:pointer;transition:all 0.3s;}
+    .candle.flame::before{content:'';position:absolute;top:-10px;left:50%;transform:translateX(-50%);width:10px;height:20px;background:linear-gradient(to top,#ff4500,#ffd700);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;animation:flicker 1s ease-in-out infinite alternate;}
+    @keyframes flicker{0%{transform:translateX(-50%) scaleY(1);}100%{transform:translateX(-50%) scaleY(1.1);}}
+    .candle.blow::before{display:none;}
+    .candle.blow{background:#ccc;}
+    button{background:#ff69b4;color:white;border:none;padding:15px 30px;font-size:1.2em;border-radius:10px;cursor:pointer;margin:10px;}
+    button:hover{background:#ff1493;}
+    #surprise{display:none;font-size:2em;color:#ffd700;margin:20px 0;animation:fadeIn 1s;}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    .balloon{position:absolute;width:50px;height:70px;background:radial-gradient(circle at 50% 30%,#ff69b4,#ff1493);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;animation:float 10s linear infinite;z-index:0;}
+    @keyframes float{from{transform:translateY(100vh);}to{transform:translateY(-100px);}}
+    .heart{position:absolute;width:30px;height:30px;background:#ff69b4;transform:rotate(45deg);animation:floatHeart 8s linear infinite;z-index:0;}
+    .heart::before,.heart::after{content:'';position:absolute;width:30px;height:30px;background:#ff69b4;border-radius:50%;}
+    .heart::before{top:-15px;left:0;}
+    .heart::after{top:0;left:15px;}
+    @keyframes floatHeart{from{transform:translateY(100vh) rotate(45deg);}to{transform:translateY(-100px) rotate(45deg);}}
+    .star{position:absolute;width:20px;height:20px;background:#ffd700;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);animation:twinkleStar 5s ease-in-out infinite;z-index:0;}
+    @keyframes twinkleStar{0%,100%{opacity:0.5;transform:scale(1);}50%{opacity:1;transform:scale(1.2);}}
+    .firework{position:absolute;width:10px;height:10px;background:#ff69b4;border-radius:50%;animation:burst 1s ease-out forwards;z-index:3;}
+    @keyframes burst{0%{transform:scale(1);opacity:1;}100%{transform:scale(20);opacity:0;}}
+    .dancer{position:absolute;font-size:3em;animation:dance 1s ease-in-out infinite alternate;z-index:2;}
+    @keyframes dance{0%{transform:rotate(-10deg);}100%{transform:rotate(10deg);}}
+
+    /* 🎂 Knife feature */
+    .knife {
+      font-size: 3em;
+      cursor: pointer;
+      transition: transform 0.3s;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .knife:hover { transform: rotate(-45deg) scale(1.2); }
+    .knife.cut { animation: slash 0.4s ease-in-out; }
+    @keyframes slash {
+      0% { transform: rotate(0deg) translateX(0); }
+      50% { transform: rotate(-60deg) translateX(20px); }
+      100% { transform: rotate(0deg) translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="clouds"></div>
+  <div class="container">
+    <h1>Happy Birthday, Chomu! 🎂✨</h1>
+    <div id="countdown"></div>
+
+    <div class="photo-frame" id="photoFrame">
+      <img src=".vscode/SHERYA.jpeg" alt="Birthday Photo" class="animated-photo">
+      <div class="sparkles"></div>
+    </div>
+
+    <div class="cake" id="cake" onclick="cutCake()">🎂</div>
+    <div class="knife" id="knife" onclick="useKnife()">🗡️</div>
+
+    <div class="candles">
+      <div class="candle flame" onclick="blowCandle(this)"></div>
+      <div class="candle flame" onclick="blowCandle(this)"></div>
+      <div class="candle flame" onclick="blowCandle(this)"></div>
+      <div class="candle flame" onclick="blowCandle(this)"></div>
+      <div class="candle flame" onclick="blowCandle(this)"></div>
+    </div>
+    <p>phele saare candle pe click krr ek ek krrke !</p>
+    <p>Cake pe click karo aur celebration dekho! 🎈</p>
+    <button onclick="startCelebration()">Start Full Celebration!</button>
+    <button onclick="revealSurprise()">Surprise Reveal!</button>
+    <div id="surprise">"Happy Birthday to the one who adds magic to ordinary days. You’re truly a blessing in my life!" 😘🎉</div>
+  </div>
+
+  <audio id="birthdaySong">
+    <source src=".vscode/happy-birthday-357371 (1).mp3" type="audio/mp3">
+  </audio>
+
+  <script>
+    function playBirthdaySong() {
+      const song = document.getElementById("birthdaySong");
+      song.play().catch(() => {
+        alert("⚠️ Click anywhere on the page first, then press the button again — browser blocked autoplay.");
+      });
+    }
+
+    const birthday = new Date('2024-12-25T00:00:00');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = birthday - now;
+      if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('countdown').innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      } else {
+        document.getElementById('countdown').innerHTML = 'Happy Birthday! 🎉';
+      }
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function cutCake() {
+      const cake = document.getElementById('cake');
+      cake.classList.add('cut');
+      for (let i = 0; i < 10; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'cake-piece';
+        piece.textContent = '🍰';
+        piece.style.left = (Math.random() * 80 + 10) + 'vw';
+        piece.style.top = (Math.random() * 80 + 10) + 'vh';
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 2000);
+      }
+      startCelebration();
+    }
+
+    function useKnife() {
+      const knife = document.getElementById('knife');
+      knife.classList.add('cut');
+      setTimeout(() => knife.classList.remove('cut'), 500);
+      cutCake();
+    }
+
+    function blowCandle(candle) {
+      candle.classList.add('blow');
+      createBalloon();
+    }
+
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.className = 'balloon';
+      balloon.style.left = Math.random() * 90 + 'vw';
+      balloon.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      balloon.style.background = `radial-gradient(circle at 50% 30%, ${['#ff69b4','#ffd700','#00ff7f','#87ceeb'][Math.floor(Math.random()*4)]}, #ff1493)`;
+      document.body.appendChild(balloon);
+      setTimeout(() => balloon.remove(), 10000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 90 + 'vw';
+      heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    function createStar() {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = Math.random() * 90 + 'vw';
+      star.style.top = Math.random() * 90 + 'vh';
+      document.body.appendChild(star);
+      setTimeout(() => star.remove(), 5000);
+    }
+
+    function createFirework() {
+      for (let i = 0; i < 20; i++) {
+        const firework = document.createElement('div');
+        firework.className = 'firework';
+        firework.style.left = Math.random() * 100 + 'vw';
+        firework.style.top = Math.random() * 100 + 'vh';
+        firework.style.background = ['#ff69b4', '#ffd700', '#00ff7f', '#87ceeb'][Math.floor(Math.random() * 4)];
+        document.body.appendChild(firework);
+        setTimeout(() => firework.remove(), 1000);
+      }
+    }
+
+    function createDancer() {
+      const dancer = document.createElement('div');
+      dancer.className = 'dancer';
+      dancer.textContent = '💃';
+      dancer.style.left = Math.random() * 90 + 'vw';
+      dancer.style.top = Math.random() * 90 + 'vh';
+      document.body.appendChild(dancer);
+      setTimeout(() => dancer.remove(), 3000);
+    }
+
+    function startCelebration() {
+      playBirthdaySong();
+      document.getElementById("photoFrame").style.display = "block";
+      createFirework();
+      for (let i = 0; i < 5; i++) setTimeout(createDancer, i * 500);
+      setInterval(createBalloon, 500);
+      setInterval(createHeart, 700);
+      setInterval(createStar, 1000);
+    }
+
+    function revealSurprise() {
+      document.getElementById('surprise').style.display = 'block';
+    }
+
+    setInterval(createBalloon, 1500);
+    setInterval(createHeart, 2000);
+    setInterval(createStar, 2500);
+  </script>
+</body>
+</html>
